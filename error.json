@@ -1,0 +1,108 @@
+{
+  "$jason": {
+    "head": {
+      "title": "Pagina de Error - tco",
+      "actions": {
+        "$load": {
+          "type": "$render"
+        },
+        "cerrar": {
+          "type": "$global.reset",
+          "items": [
+            "user",
+            "status"
+          ],
+          "success": {
+            "type": "$href",
+            "options": {
+              "url": "https://www.jasonbase.com/things/xDBD"
+            }
+          }
+        }
+      },
+      "templates": {
+        "body": {
+          "style": {
+            "border": "none",
+            "background": "#6B297E"
+          },
+          "sections": [
+            {
+              "items": [
+                {
+                  "type": "space",
+                  "style": {
+                    "height": "50"
+                  }
+                },
+                {
+                  "type": "label",
+                  "text": "Verifica los datos de acceso e intentalo nuevamente, en caso contrario, contacta a tu administración.",
+                  "style": {
+                    "color": "#FFFFFF",
+                    "padding": "20",
+                    "size": "20"
+                  }
+                },
+                {
+                  "type": "label",
+                  "text": "Si el problema persiste con la aplicación, por favor, contactanos al siguiente correo:",
+                  "style": {
+                    "color": "#FFFFFF",
+                    "padding": "20",
+                    "size": "20"
+                  }
+                },
+                {
+                  "type": "label",
+                  "text": "soporte@tuconsorcio.com.ar",
+                  "style": {
+                    "color": "#FFFFFF",
+                    "padding": "20",
+                    "size": "20"
+                  },
+                  "href": {
+                    "url": "mailto:soporte@tuconsorcio.com.ar",
+                    "view": "app"
+                  }
+                },
+                {
+                  "type": "label",
+                  "text": "OS {{$env.device.os.name}} v.{{$env.device.os.version}} Lang.{{$env.device.language}}",
+                  "style": {
+                    "color": "#FFFFFF",
+                    "padding": "20"
+                  }
+                },
+                {
+                  "type": "vertical",
+                  "style": {
+                    "padding": "20"
+                  },
+                  "components": [
+                    {
+                      "type": "button",
+                      "style": {
+                        "align": "center",
+                        "size": "20",
+                        "font": "HelveticaNeue",
+                        "background": "#461D58",
+                        "color": "#FFFFFF",
+                        "padding": "20",
+                        "corner_radius": "50"
+                      },
+                      "text": "Cerrar sesión",
+                      "action": {
+                        "trigger": "cerrar"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

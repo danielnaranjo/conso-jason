@@ -1,0 +1,131 @@
+{
+  "$jason": {
+    "head": {
+      "title": "Contactos Útiles",
+      "actions": {
+        "$load": {
+          "type": "$network.request",
+          "options": {
+            "url": "https://app.tuconsorcio.com.ar/api/v2/utiles/{{ $global.user }}"
+          },
+          "success": {
+            "type": "$render"
+          },
+          "error": {
+            "type": "$util.alert",
+            "options": {
+              "title": "debug",
+              "description": "{{JSON.stringify($jason)}}"
+            }
+          }
+        }
+      },
+      "templates": {
+        "body": {
+          "style": {
+            "border": "none"
+          },
+          "header": {
+            "title": "Contactos Útiles",
+            "style": {
+              "background": "#6B297E",
+              "color": "#FFFFFF",
+              "padding": "20"
+            }
+          },
+          "footer": {
+            "tabs": {
+              "style": {
+                "background": "#6B297E",
+                "color": "#FFFFFF"
+              },
+              "items": [
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/home.png",
+                  "text": "Home",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/B16d"
+                },
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/expensas.png",
+                  "text": "Expensas",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/jjEa"
+                },
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/avisos.png",
+                  "text": "Avisos",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/gzLn"
+                },
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/utiles.png",
+                  "text": "Contactos",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/LZPJ"
+                },
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/calendario.png",
+                  "text": "Eventos",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/zng1"
+                }
+              ]
+            }
+          },
+          "sections": [
+            {
+              "items": {
+                "{{#each $jason.results}}": {
+                  "type": "horizontal",
+                  "style": {
+                    "padding": "10",
+                    "spacing": "10"
+                  },
+                  "components": [
+                    {
+                      "type": "label",
+                      "text": "{{uti_rubro}}",
+                      "style": {
+                        "font-weight": "500"
+                      }
+                    },
+                    {
+                      "type": "label",
+                      "text": "{{uti_nombre}}"
+                    },
+                    {
+                      "type": "label",
+                      "text": "{{uti_teléfonos}}",
+                      "href": {
+                        "url": "tel:{{uti_teléfonos}}",
+                        "view": "app"
+                      }
+                    }
+                  ],
+                  "action": {
+                    "type": "$util.alert",
+                    "options": {
+                      "title": "{{uti_nombre}}",
+                      "description": "Teléfono: {{uti_teléfonos}}\r\nCelular: {{uti_celular}}\r\nRubro: {{uti_rubro}}"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

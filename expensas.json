@@ -1,0 +1,147 @@
+{
+  "$jason": {
+    "head": {
+      "title": "Listado de expensas",
+      "actions": {
+        "$pull": {
+          "trigger": "fetch"
+        },
+        "$foreground": {
+          "trigger": "fetch"
+        },
+        "$show": {
+          "trigger": "fetch"
+        },
+        "$load": {
+          "trigger": "fetch"
+        },
+        "fetch": {
+          "type": "$network.request",
+          "options": {
+            "url": "https://app.tuconsorcio.com.ar/api/v2/expensas/{{ $global.user }}"
+          },
+          "success": {
+            "type": "$render"
+          },
+          "error": {
+            "type": "$util.alert",
+            "options": {
+              "title": "debug",
+              "description": "{{JSON.stringify($jason)}}"
+            }
+          }
+        }
+      },
+      "templates": {
+        "body": {
+          "style": {
+            "border": "none"
+          },
+          "header": {
+            "title": "Listado de expensas",
+            "style": {
+              "background": "#6B297E",
+              "color": "#FFFFFF",
+              "padding": "20"
+            }
+          },
+          "footer": {
+            "tabs": {
+              "style": {
+                "background": "#6B297E",
+                "color": "#FFFFFF"
+              },
+              "items": [
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/home.png",
+                  "text": "Home",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/B16d"
+                },
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/expensas.png",
+                  "text": "Expensas",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/jjEa"
+                },
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/avisos.png",
+                  "text": "Avisos",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/gzLn"
+                },
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/utiles.png",
+                  "text": "Contactos",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/LZPJ"
+                },
+                {
+                  "image": "https://app.tuconsorcio.com.ar/img/icons/calendario.png",
+                  "text": "Eventos",
+                  "style": {
+                    "height": "21"
+                  },
+                  "url": "https://www.jasonbase.com/things/zng1"
+                }
+              ]
+            }
+          },
+          "sections": [
+            {
+              "items": {
+                "{{#each $jason.results}}": {
+                  "type": "horizontal",
+                  "style": {
+                    "padding": "10",
+                    "spacing": "10"
+                  },
+                  "components": [
+                    {
+                      "type": "label",
+                      "text": "E",
+                      "style": {
+                        "align": "center",
+                        "width": "45",
+                        "height": "45",
+                        "background": "#6B297E",
+                        "color": "#ffffff",
+                        "corner_radius": "25"
+                      },
+                      "href": {
+                        "url": "https://app.tuconsorcio.com.ar/uploads/{{env_archivo1}}",
+                        "view": "web"
+                      }
+                    },
+                    {
+                      "type": "label",
+                      "style": {
+                        "size": "14"
+                      },
+                      "text": "{{env_asunto}}"
+                    }
+                  ],
+                  "action": {
+                    "type": "$util.alert",
+                    "options": {
+                      "title": "{{env_fecha}}",
+                      "description": "{{env_asunto}}"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

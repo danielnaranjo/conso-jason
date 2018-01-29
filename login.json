@@ -1,0 +1,156 @@
+{
+  "$jason": {
+    "head": {
+      "title": "Login tuconsorcio",
+      "description": "Login",
+      "actions": {
+        "signin": {
+          "type": "$network.request",
+          "options": {
+            "url": "https://app.tuconsorcio.com.ar/api/v2/login/{{ $get.usuario }}/{{ $get.password }}"
+          },
+          "success": {
+            "type": "$cache.set",
+            "options": {
+              "user": "{{ $jason.user }}",
+              "status": "{{ $jason.status }}"
+            },
+            "success": {
+              "type": "$href",
+              "options": {
+                "url": [
+                  {
+                    "{{ #if $cache.user }}": "https://www.jasonbase.com/things/B16d"
+                  },
+                  {
+                    "{{ #else }}": "https://www.jasonbase.com/things/YAWJ"
+                  }
+                ]
+              }
+            }
+          },
+          "error": {
+            "type": "$util.alert",
+            "options": {
+              "title": "Error",
+              "description": "{{JSON.stringify($jason)}}"
+            }
+          }
+        }
+      }
+    },
+    "body": {
+      "sections": [
+        {
+          "items": [
+            {
+              "type": "space",
+              "style": {
+                "background": "#6B297E",
+                "height": "30"
+              }
+            },
+            {
+              "type": "vertical",
+              "style": {
+                "background": "#6B297E"
+              },
+              "components": [
+                {
+                  "type": "label",
+                  "text": "Administra tu consorcio de forma fácil y sencilla",
+                  "style": {
+                    "font": "HelveticaNeue",
+                    "color": "#FFFFFF",
+                    "size": "30",
+                    "padding": "20",
+                    "height": "100"
+                  }
+                },
+                {
+                  "type": "label",
+                  "text": "La mejor manera de comunicación entre administradores y propietarios",
+                  "style": {
+                    "font": "HelveticaNeue",
+                    "color": "#FFFFFF",
+                    "size": "20",
+                    "padding": "20",
+                    "height": "100"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical",
+              "style": {
+                "background": "#FFFFFF",
+                "height": "30"
+              }
+            },
+            {
+              "type": "vertical",
+              "style": {
+                "background": "#FFFFFF"
+              },
+              "components": [
+                {
+                  "type": "textfield",
+                  "name": "usuario",
+                  "style": {
+                    "font": "HelveticaNeue",
+                    "size": "20",
+                    "background": "#FFFFFF",
+                    "padding": "20"
+                  },
+                  "placeholder": "Usuario"
+                },
+                {
+                  "type": "space",
+                  "height": "5"
+                },
+                {
+                  "type": "textfield",
+                  "name": "password",
+                  "placeholder": "Contraseña",
+                  "style": {
+                    "font": "HelveticaNeue",
+                    "size": "20",
+                    "padding": "20",
+                    "secure": "true",
+                    "border": "#fff",
+                    "background": "#FFFFFF"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical",
+              "style": {
+                "background": "#FFFFFF",
+                "padding": "20"
+              },
+              "components": [
+                {
+                  "type": "button",
+                  "text": "Entrar como Consorcio",
+                  "style": {
+                    "align": "center",
+                    "size": "20",
+                    "font": "HelveticaNeue",
+                    "background": "#6B297E",
+                    "padding": "20",
+                    "color": "#FFFFFF",
+                    "corner_radius": "50"
+                  },
+                  "action": {
+                    "trigger": "signin"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
