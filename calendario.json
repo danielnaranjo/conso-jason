@@ -3,7 +3,19 @@
     "head": {
       "title": "Calendario de Eventos",
       "actions": {
+        "$pull": {
+          "trigger": "fetch"
+        },
+        "$foreground": {
+          "trigger": "fetch"
+        },
+        "$show": {
+          "trigger": "fetch"
+        },
         "$load": {
+          "trigger": "fetch"
+        },
+        "fetch": {
           "type": "$network.request",
           "options": {
             "url": "https://app.tuconsorcio.com.ar/api/v2/calendario/{{ $global.user }}"
