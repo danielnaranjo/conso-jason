@@ -3,18 +3,6 @@
     "head": {
       "title": "Principal",
       "actions": {
-        "$pull": {
-          "trigger": "fetch"
-        },
-        "$foreground": {
-          "trigger": "fetch"
-        },
-        "$show": {
-          "trigger": "fetch"
-        },
-        "$load": {
-          "trigger": "fetch"
-        },
         "fetch": {
           "type": "$network.request",
           "options": {
@@ -30,6 +18,18 @@
               "description": "{{JSON.stringify($jason)}}"
             }
           }
+        },
+        "$pull": {
+          "trigger": "fetch"
+        },
+        "$foreground": {
+          "trigger": "fetch"
+        },
+        "$show": {
+          "trigger": "fetch"
+        },
+        "$load": {
+          "trigger": "fetch"
         },
         "cerrar": {
           "type": "$global.reset",
@@ -51,7 +51,7 @@
             "border": "none"
           },
           "header": {
-            "title": "{{ $jason.user.con_nombre }}",
+            "title": "{{ $jason.title }}",
             "style": {
               "background": "#6B297E",
               "color": "#FFFFFF",
@@ -136,10 +136,10 @@
                       },
                       "url": [
                         {
-                          "{{#if $jason.user.inm_logo==''}}": "https://app.tuconsorcio.com.ar/uploads/1_1515179772.jpeg"
+                          "{{#if $jason.user[0].inm_logo==''}}": "https://app.tuconsorcio.com.ar/uploads/1_1515179772.jpeg"
                         },
                         {
-                          "{{#else $jason.user.inm_logo!=''}}": "https://app.tuconsorcio.com.ar/uploads/{{ $jason.user.inm_logo }}"
+                          "{{#else $jason.user[0].inm_logo!=''}}": "https://app.tuconsorcio.com.ar/uploads/{{ $jason.user[0].inm_logo }}"
                         }
                       ]
                     },
@@ -153,7 +153,7 @@
                       "components": [
                         {
                           "type": "label",
-                          "text": "{{ $jason.user.inm_nombre }}",
+                          "text": "{{ $jason.user[0].inm_nombre }}",
                           "style": {
                             "color": "#FFFFFF",
                             "font": "HelveticaNeue-Bold",
@@ -162,41 +162,41 @@
                         },
                         {
                           "type": "label",
-                          "text": "{{ $jason.user.inm_direccion }}",
+                          "text": "{{ $jason.user[0].inm_direccion }}",
                           "style": {
                             "color": "#FFFFFF"
                           }
                         },
                         {
                           "type": "label",
-                          "text": "{{ $jason.user.inm_telefono }}",
+                          "text": "{{ $jason.user[0].inm_telefono }}",
                           "style": {
                             "color": "#FFFFFF"
                           },
                           "href": {
-                            "url": "tel:{{ $jason.user.inm_telefono }}",
+                            "url": "tel:{{ $jason.user[0].inm_telefono }}",
                             "view": "app"
                           }
                         },
                         {
                           "type": "label",
-                          "text": "{{ $jason.user.inm_email }}",
+                          "text": "{{ $jason.user[0].inm_email }}",
                           "style": {
                             "color": "#FFFFFF"
                           },
                           "href": {
-                            "url": "mailto:{{ $jason.user.inm_email }}",
+                            "url": "mailto:{{ $jason.user[0].inm_email }}",
                             "view": "app"
                           }
                         },
                         {
                           "type": "label",
-                          "text": "{{ $jason.user.inm_web }}",
+                          "text": "{{ $jason.user[0].inm_web }}",
                           "style": {
                             "color": "#FFFFFF"
                           },
                           "href": {
-                            "url": "{{ $jason.user.inm_web }}",
+                            "url": "{{ $jason.user[0].inm_web }}",
                             "view": "app"
                           }
                         }
@@ -230,7 +230,6 @@
               "type": "horizontal",
               "items": [
                 {
-                  "{{ #if $jason.staffs }}": {
                     "{{#each $jason.staffs}}": {
                       "type": "vertical",
                       "style": {
@@ -248,17 +247,33 @@
                             "type": "$util.alert",
                             "options": {
                               "title": "Horario laboral",
-                              "description": "{{enc_horario}}"
+                              "description": [
+                                  {
+                                    "{{ #if enc_horario }}": "{{enc_horario}}"
+                                  },{
+                                    "{{ #else }}": "No disponible"
+                                  }
+                                      ]
                             }
                           }
                         },
                         {
                           "type": "label",
-                          "text": "{{enc_nombre}}"
+                          "text": [
+                              {
+                                "{{ #if enc_nombre }}" : "{{enc_nombre}}"
+                            },{
+                                "{{ #else }}": "No disponible"
+                                }]
                         },
                         {
                           "type": "label",
-                          "text": "{{enc_telefono}}",
+                          "text": [
+                              {"{{#if enc_telefono}}": "{{enc_telefono}}"},
+                              {
+                                  "{{ #else }}": "No disponible"
+                              }
+                          ],
                           "href": {
                             "url": "tel:{{enc_telefono}}",
                             "view": "app"
@@ -266,29 +281,6 @@
                         }
                       ]
                     }
-                  }
-                },
-                {
-                  "{{ #else }}": {
-                    "type": "vertical",
-                    "style": {
-                      "width": "32%",
-                      "padding": "10",
-                      "background": "#ffffff",
-                      "align": "center",
-                      "height": "150"
-                    },
-                    "components": [
-                      {
-                        "type": "image",
-                        "url": "https://app.tuconsorcio.com.ar/img/avatar.png"
-                      },
-                      {
-                        "type": "label",
-                        "text": "No disponible"
-                      }
-                    ]
-                  }
                 }
               ]
             },
