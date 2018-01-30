@@ -136,10 +136,10 @@
                       },
                       "url": [
                         {
-                          "{{#if $jason.user[0].inm_logo==''}}": "https://app.tuconsorcio.com.ar/uploads/1_1515179772.jpeg"
+                          "{{#if $jason.user.inm_logo==''}}": "https://app.tuconsorcio.com.ar/uploads/1_1515179772.jpeg"
                         },
                         {
-                          "{{#else $jason.user[0].inm_logo!=''}}": "https://app.tuconsorcio.com.ar/uploads/{{ $jason.user[0].inm_logo }}"
+                          "{{#else $jason.user.inm_logo!=''}}": "https://app.tuconsorcio.com.ar/uploads/{{ $jason.user.inm_logo }}"
                         }
                       ]
                     },
@@ -153,7 +153,7 @@
                       "components": [
                         {
                           "type": "label",
-                          "text": "{{ $jason.user[0].inm_nombre }}",
+                          "text": "{{ $jason.user.inm_nombre }}",
                           "style": {
                             "color": "#FFFFFF",
                             "font": "HelveticaNeue-Bold",
@@ -162,41 +162,41 @@
                         },
                         {
                           "type": "label",
-                          "text": "{{ $jason.user[0].inm_direccion }}",
+                          "text": "{{ $jason.user.inm_direccion }}",
                           "style": {
                             "color": "#FFFFFF"
                           }
                         },
                         {
                           "type": "label",
-                          "text": "{{ $jason.user[0].inm_telefono }}",
+                          "text": "{{ $jason.user.inm_telefono }}",
                           "style": {
                             "color": "#FFFFFF"
                           },
                           "href": {
-                            "url": "tel:{{ $jason.user[0].inm_telefono }}",
+                            "url": "tel:{{ $jason.user.inm_telefono }}",
                             "view": "app"
                           }
                         },
                         {
                           "type": "label",
-                          "text": "{{ $jason.user[0].inm_email }}",
+                          "text": "{{ $jason.user.inm_email }}",
                           "style": {
                             "color": "#FFFFFF"
                           },
                           "href": {
-                            "url": "mailto:{{ $jason.user[0].inm_email }}",
+                            "url": "mailto:{{ $jason.user.inm_email }}",
                             "view": "app"
                           }
                         },
                         {
                           "type": "label",
-                          "text": "{{ $jason.user[0].inm_web }}",
+                          "text": "{{ $jason.user.inm_web }}",
                           "style": {
                             "color": "#FFFFFF"
                           },
                           "href": {
-                            "url": "{{ $jason.user[0].inm_web }}",
+                            "url": "{{ $jason.user.inm_web }}",
                             "view": "app"
                           }
                         }
@@ -230,7 +230,7 @@
               "type": "horizontal",
               "items": [
                 {
-                  "{{#each $jason.staffs}}": {
+                  "{{ #each $jason.staffs }}": {
                     "type": "vertical",
                     "style": {
                       "width": "32%",
@@ -247,40 +247,19 @@
                           "type": "$util.alert",
                           "options": {
                             "title": "Horario laboral",
-                            "description": [
-                              {
-                                "{{ #if enc_horario }}": "{{enc_horario}}"
-                              },
-                              {
-                                "{{ #else }}": "No disponible"
-                              }
-                            ]
+                            "description": "{{ enc_horario }}"
                           }
                         }
                       },
                       {
                         "type": "label",
-                        "text": [
-                          {
-                            "{{ #if enc_nombre }}": "{{enc_nombre}}"
-                          },
-                          {
-                            "{{ #else }}": "No disponible"
-                          }
-                        ]
+                        "text": "{{ enc_nombre }}"
                       },
                       {
                         "type": "label",
-                        "text": [
-                          {
-                            "{{#if enc_telefono}}": "{{enc_telefono}}"
-                          },
-                          {
-                            "{{ #else }}": "No disponible"
-                          }
-                        ],
+                        "text": "{{ enc_telefono }}",
                         "href": {
-                          "url": "tel:{{enc_telefono}}",
+                          "url": "tel:{{ enc_telefono }}",
                           "view": "app"
                         }
                       }
@@ -313,29 +292,7 @@
               "type": "vertical",
               "items": [
                 {
-                  "{{ #if $jason.payments }}": {
-                    "{{#each $jason.payments}}": {
-                      "type": "vertical",
-                      "style": {
-                        "align": "left",
-                        "background": "#FFFFFF",
-                        "spacing": "10"
-                      },
-                      "components": [
-                        {
-                          "type": "label",
-                          "text": "{{ for_tipo }}"
-                        },
-                        {
-                          "type": "label",
-                          "text": "{{ for_informacion }}"
-                        }
-                      ]
-                    }
-                  }
-                },
-                {
-                  "{{ #else }}": {
+                  "{{ #each $jason.payments }}": {
                     "type": "vertical",
                     "style": {
                       "align": "left",
@@ -345,11 +302,11 @@
                     "components": [
                       {
                         "type": "label",
-                        "text": "No disponible"
+                        "text": "{{ for_tipo }}"
                       },
                       {
                         "type": "label",
-                        "text": "Solicita a tu administración"
+                        "text": "{{ for_informacion }}"
                       }
                     ]
                   }
