@@ -230,57 +230,62 @@
               "type": "horizontal",
               "items": [
                 {
-                    "{{#each $jason.staffs}}": {
-                      "type": "vertical",
-                      "style": {
-                        "width": "32%",
-                        "padding": "10",
-                        "background": "#ffffff",
-                        "align": "center",
-                        "height": "150"
-                      },
-                      "components": [
-                        {
-                          "type": "image",
-                          "url": "https://app.tuconsorcio.com.ar/img/avatar.png",
-                          "action": {
-                            "type": "$util.alert",
-                            "options": {
-                              "title": "Horario laboral",
-                              "description": [
-                                  {
-                                    "{{ #if enc_horario }}": "{{enc_horario}}"
-                                  },{
-                                    "{{ #else }}": "No disponible"
-                                  }
-                                      ]
-                            }
-                          }
-                        },
-                        {
-                          "type": "label",
-                          "text": [
+                  "{{#each $jason.staffs}}": {
+                    "type": "vertical",
+                    "style": {
+                      "width": "32%",
+                      "padding": "10",
+                      "background": "#ffffff",
+                      "align": "center",
+                      "height": "150"
+                    },
+                    "components": [
+                      {
+                        "type": "image",
+                        "url": "https://app.tuconsorcio.com.ar/img/avatar.png",
+                        "action": {
+                          "type": "$util.alert",
+                          "options": {
+                            "title": "Horario laboral",
+                            "description": [
                               {
-                                "{{ #if enc_nombre }}" : "{{enc_nombre}}"
-                            },{
+                                "{{ #if enc_horario }}": "{{enc_horario}}"
+                              },
+                              {
                                 "{{ #else }}": "No disponible"
-                                }]
-                        },
-                        {
-                          "type": "label",
-                          "text": [
-                              {"{{#if enc_telefono}}": "{{enc_telefono}}"},
-                              {
-                                  "{{ #else }}": "No disponible"
                               }
-                          ],
-                          "href": {
-                            "url": "tel:{{enc_telefono}}",
-                            "view": "app"
+                            ]
                           }
                         }
-                      ]
-                    }
+                      },
+                      {
+                        "type": "label",
+                        "text": [
+                          {
+                            "{{ #if enc_nombre }}": "{{enc_nombre}}"
+                          },
+                          {
+                            "{{ #else }}": "No disponible"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "label",
+                        "text": [
+                          {
+                            "{{#if enc_telefono}}": "{{enc_telefono}}"
+                          },
+                          {
+                            "{{ #else }}": "No disponible"
+                          }
+                        ],
+                        "href": {
+                          "url": "tel:{{enc_telefono}}",
+                          "view": "app"
+                        }
+                      }
+                    ]
+                  }
                 }
               ]
             },
