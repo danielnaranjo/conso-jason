@@ -1,7 +1,9 @@
 {
   "$jason": {
     "head": {
-      "title": "Listado de expensas",
+      "title": "tco_expensas",
+      "description": "Listado de expensas",
+      "offline": "true",
       "actions": {
         "$pull": {
           "trigger": "fetch"
@@ -132,7 +134,7 @@
                   "action": {
                     "type": "$util.alert",
                     "options": {
-                      "title": "{{env_fecha}}",
+                      "title": "{{ function(){ var original = env_fecha.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]; }() }}",
                       "description": "{{env_asunto}}"
                     }
                   }

@@ -1,7 +1,9 @@
 {
   "$jason": {
     "head": {
-      "title": "Pagina de Error - tco",
+      "title": "tco_error",
+      "description": "Pagina de error",
+      "offline": "true",
       "actions": {
         "$load": {
           "type": "$render"
@@ -91,7 +93,7 @@
                         "padding": "20",
                         "corner_radius": "50"
                       },
-                      "text": "Cerrar sesión",
+                      "text": "Intentarlo nuevamente",
                       "action": {
                         "trigger": "cerrar"
                       }

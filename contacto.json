@@ -1,20 +1,10 @@
 {
   "$jason": {
     "head": {
-      "title": "Contactos Útiles",
+      "title": "tco_contactos",
+      "description": "Contactos utiles",
+      "offline": "true",
       "actions": {
-        "$pull": {
-          "trigger": "fetch"
-        },
-        "$foreground": {
-          "trigger": "fetch"
-        },
-        "$show": {
-          "trigger": "fetch"
-        },
-        "$load": {
-          "trigger": "fetch"
-        },
         "fetch": {
           "type": "$network.request",
           "options": {
@@ -30,6 +20,18 @@
               "description": "{{JSON.stringify($jason)}}"
             }
           }
+        },
+        "$pull": {
+          "trigger": "fetch"
+        },
+        "$foreground": {
+          "trigger": "fetch"
+        },
+        "$show": {
+          "trigger": "fetch"
+        },
+        "$load": {
+          "trigger": "fetch"
         }
       },
       "templates": {

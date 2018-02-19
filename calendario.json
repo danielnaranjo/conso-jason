@@ -1,20 +1,10 @@
 {
   "$jason": {
     "head": {
-      "title": "Calendario de Eventos",
+      "title": "tco_calendario",
+      "description": "Calendario de eventos",
+      "offline": "true",
       "actions": {
-        "$pull": {
-          "trigger": "fetch"
-        },
-        "$foreground": {
-          "trigger": "fetch"
-        },
-        "$show": {
-          "trigger": "fetch"
-        },
-        "$load": {
-          "trigger": "fetch"
-        },
         "fetch": {
           "type": "$network.request",
           "options": {
@@ -30,6 +20,18 @@
               "description": "{{JSON.stringify($jason)}}"
             }
           }
+        },
+        "$pull": {
+          "trigger": "fetch"
+        },
+        "$foreground": {
+          "trigger": "fetch"
+        },
+        "$show": {
+          "trigger": "fetch"
+        },
+        "$load": {
+          "trigger": "fetch"
         }
       },
       "templates": {
@@ -111,13 +113,13 @@
                     },
                     {
                       "type": "label",
-                      "text": "{{cal_fechaini}}"
+                      "title": "{{ function(){ var original = cal_fechaini.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]+ ' '+original[1]; }() }}"
                     }
                   ],
                   "action": {
                     "type": "$util.alert",
                     "options": {
-                      "title": "{{cal_fechaini}}",
+                      "title": "{{ function(){ var original = cal_fechaini.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]; }() }}",
                       "description": "{{cal_nombre}}"
                     }
                   }

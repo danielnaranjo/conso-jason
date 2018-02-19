@@ -1,8 +1,27 @@
 {
   "$jason": {
     "head": {
-      "title": "Principal",
+      "title": "tco_Principal",
+      "description": "Formas de pago y encargados",
+      "offline": "true",
+      "agents": {
+        "simple": {
+          "url": "file://pusher.html"
+        }
+      },
       "actions": {
+        "$pull": {
+          "trigger": "fetch"
+        },
+        "$foreground": {
+          "trigger": "fetch"
+        },
+        "$show": {
+          "trigger": "fetch"
+        },
+        "$load": {
+          "trigger": "fetch"
+        },
         "fetch": {
           "type": "$network.request",
           "options": {
@@ -19,29 +38,11 @@
             }
           }
         },
-        "$pull": {
-          "trigger": "fetch"
-        },
-        "$foreground": {
-          "trigger": "fetch"
-        },
-        "$show": {
-          "trigger": "fetch"
-        },
-        "$load": {
-          "trigger": "fetch"
-        },
-        "cerrar": {
-          "type": "$global.reset",
-          "items": [
-            "user",
-            "status"
-          ],
-          "success": {
-            "type": "$href",
-            "options": {
-              "url": "https://www.jasonbase.com/things/xDBD"
-            }
+        "banner": {
+          "type": "$util.alert",
+          "options": {
+            "title": "Novedades",
+            "description": "{{$jason.message}}"
           }
         }
       },
@@ -51,7 +52,7 @@
             "border": "none"
           },
           "header": {
-            "title": "{{ $jason.title }}",
+            "title": "{{ $jason.user.con_nombre }}",
             "style": {
               "background": "#6B297E",
               "color": "#FFFFFF",
@@ -60,10 +61,28 @@
             "menu": {
               "text": "Cerrar",
               "style": {
-                "color": "#FFFFFF"
+                "color": "#FFFFFF",
+                "padding": "10"
               },
               "action": {
-                "trigger": "cerrar"
+                "type": "$util.alert",
+                "options": {
+                  "title": "Has cerrado la sesión",
+                  "description": "Gracias por utilizar tuconsorcio.com.ar"
+                },
+                "success": {
+                  "type": "$href",
+                  "options": {
+                    "url": "https://www.jasonbase.com/things/xDBD"
+                  },
+                  "success": {
+                    "type": "$global.reset",
+                    "items": [
+                      "user",
+                      "status"
+                    ]
+                  }
+                }
               }
             }
           },
@@ -157,7 +176,7 @@
                           "style": {
                             "color": "#FFFFFF",
                             "font": "HelveticaNeue-Bold",
-                            "size": "18"
+                            "size": "16"
                           }
                         },
                         {
@@ -218,9 +237,11 @@
                 "components": [
                   {
                     "type": "label",
-                    "text": "Encargado(s)",
+                    "text": "Forma(s) de Pago",
                     "style": {
-                      "padding": "5"
+                      "color": "#461D58",
+                      "font": "HelveticaNeue-Bold",
+                      "size": "18"
                     }
                   }
                 ]
@@ -228,45 +249,32 @@
             },
             {
               "type": "horizontal",
-              "items": [
-                {
-                  "{{ #each $jason.staffs }}": {
-                    "type": "vertical",
-                    "style": {
-                      "width": "32%",
-                      "padding": "10",
-                      "background": "#ffffff",
-                      "align": "center",
-                      "height": "150"
-                    },
-                    "components": [
-                      {
-                        "type": "image",
-                        "url": "https://app.tuconsorcio.com.ar/img/avatar.png",
-                        "action": {
-                          "type": "$util.alert",
-                          "options": {
-                            "title": "Horario laboral",
-                            "description": "{{ enc_horario }}"
-                          }
-                        }
-                      },
-                      {
-                        "type": "label",
-                        "text": "{{ enc_nombre }}"
-                      },
-                      {
-                        "type": "label",
-                        "text": "{{ enc_telefono }}",
-                        "href": {
-                          "url": "tel:{{ enc_telefono }}",
-                          "view": "app"
-                        }
+              "items": {
+                "{{#each $jason.payments}}": {
+                  "type": "vertical",
+                  "style": {
+                    "align": "left",
+                    "background": "#FFFFFF",
+                    "padding": "10",
+                    "width": "50%",
+                    "height": "150"
+                  },
+                  "components": [
+                    {
+                      "type": "label",
+                      "text": "{{ for_tipo }}",
+                      "style": {
+                        "font": "HelveticaNeue-Bold",
+                        "size": "16"
                       }
-                    ]
-                  }
+                    },
+                    {
+                      "type": "label",
+                      "text": "{{ function() { return for_informacion.replace(/<.+?>/g, ''); }() }}"
+                    }
+                  ]
                 }
-              ]
+              }
             },
             {
               "type": "horizontal",
@@ -274,15 +282,75 @@
                 "type": "horizontal",
                 "style": {
                   "align": "left",
-                  "background": "#461D58",
+                  "background": "#FFFFFF",
                   "spacing": "10"
                 },
                 "components": [
                   {
                     "type": "label",
-                    "text": "Forma de Pago",
+                    "text": "Encargado(s)",
                     "style": {
-                      "color": "#FFFFFF"
+                      "color": "#461D58",
+                      "font": "HelveticaNeue-Bold",
+                      "size": "18"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "horizontal",
+              "items": {
+                "{{#each $jason.staffs}}": {
+                  "type": "vertical",
+                  "style": {
+                    "padding": "10",
+                    "background": "#ffffff",
+                    "width": "50%",
+                    "height": "150"
+                  },
+                  "components": [
+                    {
+                      "type": "label",
+                      "text": "{{enc_nombre}}",
+                      "style": {
+                        "font": "HelveticaNeue-Bold",
+                        "size": "16"
+                      }
+                    },
+                    {
+                      "type": "label",
+                      "text": "{{enc_telefono}}",
+                      "href": {
+                        "url": "tel:{{enc_telefono}}",
+                        "view": "app"
+                      }
+                    },
+                    {
+                      "type": "label",
+                      "text": "Horario laboral: {{enc_horario}}"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "horizontal",
+              "header": {
+                "type": "horizontal",
+                "style": {
+                  "align": "left",
+                  "background": "#FFFFFF",
+                  "spacing": "10"
+                },
+                "components": [
+                  {
+                    "type": "label",
+                    "text": "Amenities",
+                    "style": {
+                      "color": "#461D58",
+                      "font": "HelveticaNeue-Bold",
+                      "size": "18"
                     }
                   }
                 ]
@@ -290,28 +358,29 @@
             },
             {
               "type": "vertical",
-              "items": [
-                {
-                  "{{ #each $jason.payments }}": {
-                    "type": "vertical",
-                    "style": {
-                      "align": "left",
-                      "background": "#FFFFFF",
-                      "spacing": "10"
-                    },
-                    "components": [
-                      {
-                        "type": "label",
-                        "text": "{{ for_tipo }}"
-                      },
-                      {
-                        "type": "label",
-                        "text": "{{ for_informacion }}"
+              "items": {
+                "{{#each $jason.amenities}}": {
+                  "type": "vertical",
+                  "style": {
+                    "padding": "10",
+                    "background": "#ffffff"
+                  },
+                  "components": [
+                    {
+                      "type": "label",
+                      "text": "{{ ame_amenities }}",
+                      "style": {
+                        "font": "HelveticaNeue-Bold",
+                        "size": "16"
                       }
-                    ]
-                  }
+                    },
+                    {
+                      "type": "label",
+                      "text": "Horario: {{ ame_horario }}"
+                    }
+                  ]
                 }
-              ]
+              }
             }
           ]
         }

@@ -1,7 +1,7 @@
 {
   "$jason": {
     "head": {
-      "title": "Avisos del Consorcio",
+      "title": "tco_avisos",
       "actions": {
         "$pull": {
           "trigger": "fetch"
@@ -18,7 +18,7 @@
         "fetch": {
           "type": "$network.request",
           "options": {
-            "url": "https://app.tuconsorcio.com.ar/api/v2/alertas/{{ $global.user }}"
+            "url": "https://app.tuconsorcio.com.ar/api/v2/alertas/12"
           },
           "success": {
             "type": "$render"
@@ -124,7 +124,8 @@
                     {
                       "type": "label",
                       "style": {
-                        "size": "14"
+                        "size": "14",
+                        "font": "HelveticaNeue-Bold"
                       },
                       "text": "{{ale_asunto}}"
                     }
@@ -132,7 +133,7 @@
                   "action": {
                     "type": "$util.alert",
                     "options": {
-                      "title": "{{ale_fecha}}",
+                      "title": "{{ function(){ var original = ale_fecha.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]; }() }}",
                       "description": "{{ale_asunto}}"
                     }
                   }
