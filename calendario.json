@@ -101,7 +101,7 @@
             {
               "items": {
                 "{{#each $jason.results}}": {
-                  "type": "vertical",
+                  "type": "horizontal",
                   "style": {
                     "padding": "10",
                     "spacing": "10"
@@ -109,17 +109,31 @@
                   "components": [
                     {
                       "type": "label",
-                      "text": "{{cal_nombre}}",
+                      "text": "C",
                       "style": {
-                        "size": "14"
+                        "align": "center",
+                        "width": "45",
+                        "height": "45",
+                        "background": "#6B297E",
+                        "color": "#ffffff",
+                        "corner_radius": "25"
                       }
                     },
                     {
-                      "type": "label",
-                      "style": {
-                        "size": "10"
-                      },
-                      "text": "{{ function(){ var original = cal_fechaini.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]+ ' '+original[1]; }() }}"
+                      "type": "vertical",
+                      "components": [
+                        {
+                          "type": "label",
+                          "style": {
+                            "size": "14"
+                          },
+                          "text": "{{ function(){ var original = cal_fechaini.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]+ ' '+original[1]; }() }}"
+                        },
+                        {
+                          "type": "label",
+                          "text": "{{cal_nombre}}"
+                        }
+                      ]
                     }
                   ],
                   "action": {
