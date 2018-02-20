@@ -9,6 +9,14 @@
           "url": "file://pusher.html"
         }
       },
+      "styles": {
+        "androide": {
+          "height": "100"
+        },
+        "iose": {
+          "height": "150"
+        }
+      },
       "actions": {
         "$pull": {
           "trigger": "fetch"
@@ -248,16 +256,14 @@
               }
             },
             {
-              "type": "horizontal",
+              "type": "vertical",
               "items": {
                 "{{#each $jason.payments}}": {
                   "type": "vertical",
                   "style": {
                     "align": "left",
                     "background": "#FFFFFF",
-                    "padding": "10",
-                    "width": "50%",
-                    "height": "150"
+                    "padding": "10"
                   },
                   "components": [
                     {
@@ -277,9 +283,9 @@
               }
             },
             {
-              "type": "horizontal",
+              "type": "vertical",
               "header": {
-                "type": "horizontal",
+                "type": "vertical",
                 "style": {
                   "align": "left",
                   "background": "#FFFFFF",
@@ -299,15 +305,13 @@
               }
             },
             {
-              "type": "horizontal",
+              "type": "vertical",
               "items": {
                 "{{#each $jason.staffs}}": {
                   "type": "vertical",
                   "style": {
                     "padding": "10",
-                    "background": "#ffffff",
-                    "width": "50%",
-                    "height": "150"
+                    "background": "#ffffff"
                   },
                   "components": [
                     {

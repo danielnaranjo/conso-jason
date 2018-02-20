@@ -4,6 +4,34 @@
       "title": "tco_login",
       "description": "Login de Consorcio",
       "offline": "true",
+      "styles": {
+        "tuconsorcio": {
+          "align": "center",
+          "font": "HelveticaNeue",
+          "color": "#6B297E",
+          "size": "22",
+          "height": "50"
+        },
+        "input_fields": {
+          "background": "#FFFFFF",
+          "font": "HelveticaNeue",
+          "size": "20",
+          "padding": "20"
+        },
+        "boton": {
+          "align": "center",
+          "size": "20",
+          "font": "HelveticaNeue",
+          "background": "#6B297E",
+          "padding": "20",
+          "color": "#FFFFFF",
+          "corner_radius": "10"
+        },
+        "fondo_sin_borde": {
+          "background": "#FFFFFF",
+          "border": "#FFFFFF"
+        }
+      },
       "actions": {
         "$load": {
           "type": "$global.reset",
@@ -53,9 +81,8 @@
           "items": [
             {
               "type": "space",
+              "class": "fondo_sin_borde",
               "style": {
-                "background": "#FFFFFF",
-                "border": "none",
                 "height": "30"
               }
             },
@@ -78,34 +105,19 @@
                 {
                   "type": "label",
                   "text": "tuconsorcio.com.ar",
-                  "style": {
-                    "align": "center",
-                    "font": "HelveticaNeue",
-                    "color": "#6B297E",
-                    "size": "22",
-                    "height": "50"
-                  }
+                  "class": "tuconsorcio"
                 }
               ]
             },
             {
               "type": "vertical",
-              "style": {
-                "background": "#FFFFFF",
-                "border": "#FFFFFF"
-              },
+              "class": "fondo_sin_borde",
               "components": [
                 {
                   "type": "textfield",
                   "name": "usuario",
                   "placeholder": "Usuario",
-                  "style": {
-                    "background": "#FFFFFF",
-                    "color": "#CCCCCC",
-                    "font": "HelveticaNeue",
-                    "size": "20",
-                    "padding": "20"
-                  }
+                  "class": "input_fields"
                 },
                 {
                   "type": "space",
@@ -115,38 +127,24 @@
                   "type": "textfield",
                   "name": "password",
                   "placeholder": "Contraseña",
+                  "class": "input_fields",
                   "style": {
-                    "background": "#FFFFFF",
-                    "color": "#CCCCCC",
-                    "font": "HelveticaNeue",
-                    "size": "20",
-                    "secure": "true",
-                    "border": "#FFFFFF",
-                    "padding": "20"
+                    "secure": "true"
                   }
                 }
               ]
             },
             {
               "type": "vertical",
+              "class": "fondo_sin_borde",
               "style": {
-                "background": "#FFFFFF",
-                "border": "#FFFFFF",
                 "padding": "20"
               },
               "components": [
                 {
                   "type": "button",
                   "text": "Entrar",
-                  "style": {
-                    "align": "center",
-                    "size": "20",
-                    "font": "HelveticaNeue",
-                    "background": "#6B297E",
-                    "padding": "20",
-                    "color": "#FFFFFF",
-                    "corner_radius": "10"
-                  },
+                  "class": "boton",
                   "action": {
                     "trigger": "signin"
                   }

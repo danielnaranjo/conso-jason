@@ -111,7 +111,7 @@
                       "type": "label",
                       "text": "{{uti_rubro}}",
                       "style": {
-                        "font-weight": "500"
+                        "font": "HelveticaNeue-Bold"
                       }
                     },
                     {

@@ -7,19 +7,6 @@
       "actions": {
         "$load": {
           "type": "$render"
-        },
-        "cerrar": {
-          "type": "$global.reset",
-          "items": [
-            "user",
-            "status"
-          ],
-          "success": {
-            "type": "$href",
-            "options": {
-              "url": "https://www.jasonbase.com/things/xDBD"
-            }
-          }
         }
       },
       "templates": {
@@ -94,8 +81,8 @@
                         "corner_radius": "50"
                       },
                       "text": "Intentarlo nuevamente",
-                      "action": {
-                        "trigger": "cerrar"
+                      "href": {
+                        "url": "https://www.jasonbase.com/things/xDBD"
                       }
                     }
                   ]

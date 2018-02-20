@@ -101,7 +101,7 @@
             {
               "items": {
                 "{{#each $jason.results}}": {
-                  "type": "horizontal",
+                  "type": "vertical",
                   "style": {
                     "padding": "10",
                     "spacing": "10"
@@ -109,11 +109,17 @@
                   "components": [
                     {
                       "type": "label",
-                      "text": "{{cal_nombre}}"
+                      "text": "{{cal_nombre}}",
+                      "style": {
+                        "size": "14"
+                      }
                     },
                     {
                       "type": "label",
-                      "title": "{{ function(){ var original = cal_fechaini.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]+ ' '+original[1]; }() }}"
+                      "style": {
+                        "size": "10"
+                      },
+                      "text": "{{ function(){ var original = cal_fechaini.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]+ ' '+original[1]; }() }}"
                     }
                   ],
                   "action": {

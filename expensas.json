@@ -108,14 +108,11 @@
                   },
                   "components": [
                     {
-                      "type": "label",
-                      "text": "E",
+                      "type": "image",
+                      "url": "https://app.tuconsorcio.com.ar/img/logo-violeta-01.png",
                       "style": {
-                        "align": "center",
-                        "width": "45",
-                        "height": "45",
-                        "background": "#6B297E",
-                        "color": "#ffffff",
+                        "width": "50",
+                        "height": "50",
                         "corner_radius": "25"
                       },
                       "href": {
@@ -124,20 +121,25 @@
                       }
                     },
                     {
-                      "type": "label",
-                      "style": {
-                        "size": "14"
-                      },
-                      "text": "{{env_asunto}}"
+                      "type": "vertical",
+                      "components": [
+                        {
+                          "type": "label",
+                          "style": {
+                            "size": "14"
+                          },
+                          "text": "{{env_asunto}}"
+                        },
+                        {
+                          "type": "label",
+                          "style": {
+                            "size": "10"
+                          },
+                          "text": "{{ function(){ var original = env_fecha.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]; }() }}"
+                        }
+                      ]
                     }
-                  ],
-                  "action": {
-                    "type": "$util.alert",
-                    "options": {
-                      "title": "{{ function(){ var original = env_fecha.split(' '); var changed = original[0].split('-'); return changed[2]+'/'+changed[1]+'/'+changed[0]; }() }}",
-                      "description": "{{env_asunto}}"
-                    }
-                  }
+                  ]
                 }
               }
             }
